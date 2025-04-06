@@ -1,92 +1,463 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+/* Base styles */
+:root {
+  --primary-color: #3498db;
+  --primary-dark: #2980b9;
+  --secondary-color: #2c3e50;
+  --success-color: #27ae60;
+  --danger-color: #e74c3c;
+  --warning-color: #f1c40f;
+  --light-bg: #ecf0f1;
+  --border-color: #ddd;
+  --text-color: #333;
+  --text-light: #666;
+  --white: #fff;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+  /* Keep existing code for the shadcn UI theme variables */
+}
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--light-bg);
+  margin: 0;
+  padding: 0;
+}
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  color: var(--secondary-color);
+}
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+/* Header styles */
+.app-header {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+.app-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+.app-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--white);
+}
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+.app-header a {
+  color: var(--white);
+  text-decoration: none;
+}
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+.app-header nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-    --radius: 0.5rem;
+.app-header nav li {
+  margin-left: 20px;
+}
 
-    --sidebar-background: 0 0% 98%;
+.app-header nav a {
+  padding: 5px 10px;
+}
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+.app-header nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
 
-    --sidebar-primary: 240 5.9% 10%;
+/* App layout */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    --sidebar-primary-foreground: 0 0% 98%;
+main.container {
+  flex-grow: 1;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 
-    --sidebar-accent: 240 4.8% 95.9%;
+/* Table styles */
+.table-container {
+  overflow-x: auto;
+  box-shadow: var(--box-shadow);
+  border-radius: 4px;
+  background-color: var(--white);
+}
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
 
-    --sidebar-border: 220 13% 91%;
+table th, table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border-color);
+}
 
-    --sidebar-ring: 217.2 91.2% 59.8%;
+table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+table th.asc::after {
+  content: ' ↑';
+}
+
+table th.desc::after {
+  content: ' ↓';
+}
+
+table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.description-cell {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 5px;
+  justify-content: flex-start;
+}
+
+/* Status indicators */
+.status {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status.available {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status.sold {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.status-badge.available {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.sold {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+/* Button styles */
+button, .btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.add-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.add-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.view-btn {
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.edit-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.delete-btn {
+  background-color: var(--danger-color);
+  color: white;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.back-btn {
+  background-color: #f0f0f0;
+  color: #666;
+  text-decoration: none;
+}
+
+.view-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.edit-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.back-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Form styling */
+.vehicle-form {
+  max-width: 700px;
+  margin: 0 auto;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+}
+
+.vehicle-form h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-label span {
+  margin-left: 8px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+  color: white;
+  min-width: 120px;
+}
+
+.cancel-btn {
+  background-color: #95a5a6;
+  color: white;
+  min-width: 120px;
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.cancel-btn:hover {
+  background-color: #7f8c8d;
+}
+
+/* Utility classes */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+.error {
+  color: var(--danger-color);
+  text-align: center;
+  padding: 20px;
+  font-weight: 500;
+}
+
+.error-text {
+  color: var(--danger-color);
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: block;
+}
+
+input.error, textarea.error, select.error {
+  border-color: var(--danger-color);
+}
+
+.table-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.no-vehicles {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: var(--white);
+  border-radius: 4px;
+  box-shadow: var(--box-shadow);
+}
+
+/* Vehicle details page */
+.vehicle-details {
+  background-color: var(--white);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.detail-header {
+  margin-bottom: 20px;
+}
+
+.detail-section {
+  margin-bottom: 30px;
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.detail-label {
+  font-weight: 600;
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  flex-grow: 1;
+}
+
+.detail-value.description {
+  white-space: pre-line;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-header .container {
+    flex-direction: column;
+    align-items: flex-start;
   }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  
+  .app-header nav {
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .app-header nav ul {
+    display: flex;
+    width: 100%;
+  }
+  
+  .app-header nav li {
+    margin-left: 0;
+    margin-right: 15px;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+  }
+  
+  .detail-label {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .button-group button,
+  .button-group a {
+    width: 100%;
+    margin-bottom: 10px;
   }
 }
 
