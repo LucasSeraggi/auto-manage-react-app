@@ -1,3 +1,3 @@
-# react Project
+# React Project
 
 npm start
